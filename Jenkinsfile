@@ -6,9 +6,7 @@ node {
      commit_id = readFile('.git/commit-id').trim()
    }
    stage('test') {
-     withMaven {
-        maven: 'maven'
-     }{
+     withMaven(maven: 'maven') {
         bat 'mvn clean install'
      }
    }
