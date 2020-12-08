@@ -7,6 +7,7 @@ node {
    }
    stage('test') {
      withMaven {
+        maven: 'maven',
         bat 'mvn clean install'
      }
    }
