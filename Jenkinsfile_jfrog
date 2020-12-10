@@ -14,7 +14,7 @@ node {
 
         stage('Config Build Info') {
             buildInfo.env.capture = true
-            buildInfo.env.filter.addInclude("*")
+            //buildInfo.env.filter.addInclude("*")
         }
 
         //stage('Extra Maven configurations') {
