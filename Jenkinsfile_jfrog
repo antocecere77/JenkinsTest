@@ -1,4 +1,6 @@
 node {
+    jdk = tool name: 'Jdk11'
+    env.JAVA_HOME = "${jdk}"
     def server = Artifactory.server('antocecere77.jfrog.io')
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo = Artifactory.newBuildInfo()
