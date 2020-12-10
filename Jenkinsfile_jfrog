@@ -15,11 +15,12 @@ node {
             buildInfo.env.filter.addInclude("*")
         }
 
-        stage('Extra Maven configurations') {
-            //rtMaven.usesPlugin = true // Artifactory plugin already defined in build script
-        }
+        //stage('Extra Maven configurations') {
+        //    //rtMaven.usesPlugin = true // Artifactory plugin already defined in build script
+        //}
         stage('Exec Maven') {
-            rtMaven.run 'pom.xml', goals: 'clean install', buildInfo: buildInfo
+            rtMaven.run 'pom.xml', goals: 'clean', buildInfo: buildInfo
+            rtMaven.run 'pom.xml', goals: 'install', buildInfo: buildInfo
         }
         stage('Publish build info') {
             server.publishBuildInfo buildInfo
