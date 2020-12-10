@@ -1,0 +1,27 @@
+node {
+    def server = Artifactory.server('antocecere77.jfrog.io')
+    def rtMaven = Artifactory.newMavenBuild()
+    def buildInfo = Artifactory.newBuildInfo()
+    stage 'Build'
+        git url: 'https://github.com/antocecere77/JenkinsTest.git'
+
+    stage 'Artifactory configuration'
+        rtMaven.tool = 'maven' // Tool name from Jenkins configuration
+        rtMaven.deployer releaseRepo:'libs-release-local', snapshotRepo:'libs-snapshot-local', server: server
+        rtGradle.resolver releaseRepo:'libs-release', snapshotRepo:'libs-snapshot', server: server
+
+        stage('Config Build Info') {
+            buildInfo.env.capture = true
+            buildInfo.env.filter.addInclude("*")
+        }
+
+        stage('Extra gradle configurations') {
+            rtMaven.usesPlugin = true // Artifactory plugin already defined in build script
+        }
+        stage('Exec Gradle') {
+            rtMaven.run 'pom.xml', goals: 'clean install', buildInfo: buildInfo
+        }
+        stage('Publish build info') {
+            server.publishBuildInfo buildInfo
+        }
+}
