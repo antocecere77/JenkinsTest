@@ -15,10 +15,10 @@ node {
             buildInfo.env.filter.addInclude("*")
         }
 
-        stage('Extra gradle configurations') {
-            rtMaven.usesPlugin = true // Artifactory plugin already defined in build script
+        stage('Extra Maven configurations') {
+            //rtMaven.usesPlugin = true // Artifactory plugin already defined in build script
         }
-        stage('Exec Gradle') {
+        stage('Exec Maven') {
             rtMaven.run 'pom.xml', goals: 'clean install', buildInfo: buildInfo
         }
         stage('Publish build info') {
