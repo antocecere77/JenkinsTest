@@ -51,9 +51,11 @@ node {
             }
         }
        stage('send result to slack') {
-           currentBuild.result = "SUCCESS";
+           def icons = [":unicorn_face:", ":beer:", ":bee:", ":man_dancing:",
+               ":party_parrot:", ":ghost:", ":dancer:", ":scream_cat:"]
+           def randomIndex = (new Random()).nextInt(icons.size())
 
            // send slack notification
-           slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+           slackSend (color: 'good', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) ${icons[randomIndex]}")
        }
 }
