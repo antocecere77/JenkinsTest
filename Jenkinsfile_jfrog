@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurperClassic
+
 node {
     jdk = tool name: 'Jdk11'
     env.JAVA_HOME = "${jdk}"
@@ -57,5 +59,10 @@ node {
 
            // send slack notification
            slackSend (color: 'good', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) ${icons[randomIndex]}")
+       }
+       stage('call custom api') {
+           // example of custom API
+           def pr = httpRequest url: "http://localhost:8080/hello-world"
+           println(pr)
        }
 }
