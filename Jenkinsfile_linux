@@ -1,5 +1,7 @@
 node {
    def commit_id
+   jdk = tool name: 'Jdk11'
+   env.JAVA_HOME = "${jdk}"
    stage('Preparation') {
      checkout scm
      sh "git rev-parse --short HEAD > .git/commit-id"
