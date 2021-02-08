@@ -12,4 +12,10 @@ public class HelloWorldController {
         System.out.println("Hello world called");
         return ResponseEntity.ok("Hello World!!!");
     }
+
+    @GetMapping("/hello-world2")
+    public ResponseEntity<?> helloWorld2() {
+        System.out.println("Hello world called");
+        return ResponseEntity.ok("Hello World!!!");
+    }
 }
