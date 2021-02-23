@@ -1,12 +1,11 @@
 FROM openjdk:11-jre-slim as builder
 WORKDIR application
-ADD target/${project.build.finalName}.jar ${project.build.finalName}.jar
-RUN java -Djarmode=layertools -jar ${project.build.finalName}.jar extract
+ADD target/jenkins-0.0.3-SNAPSHOT.jar jenkins-0.0.3-SNAPSHOT.jar
+RUN java -Djarmode=layertools -jar jenkins-0.0.3-SNAPSHOT.jar extract
 
 FROM openjdk:11-jre-slim
-LABEL PROJECT_NAME=${project.artifactId} \
-      PROJECT=${project.id}
-
+LABEL PROJECT_NAME=jenkins \
+      PROJECT=jenkins
 
 EXPOSE 8080
 
