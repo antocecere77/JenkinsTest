@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.antocecere77</groupId>
 	<artifactId>jenkins</artifactId>
-	<version>0.0.12-SNAPSHOT</version>
+	<version>0.0.13-SNAPSHOT</version>
 	<name>jenkins</name>
 	<description>Demo project for Spring Boot</description>
 
